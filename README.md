@@ -1,0 +1,2 @@
+# symptocare
+ Disease predictor 
