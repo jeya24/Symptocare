@@ -2,32 +2,39 @@ package healthsystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
-public class login extends JFrame{
+public class login extends JFrame implements ActionListener {
 
     JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;
-    JButton b2;
+    JButton button1,button2,button3,b4,b9;
     JTextField t1,t2,t3,t4,t5;
-    JRadioButton r1,r2;
     JPasswordField p1;
 
-    login() {
+    String email,pwd;
+
+    login(String pwd,String email) {
+        this.pwd=pwd;
+        this.email=email;
+
 
         l1 = new JLabel("Symptocare");
-        l1.setForeground(Color.BLACK);
+        l1.setForeground(new Color(0x000000));
         l1.setFont(new Font("Verdana",Font.BOLD,18));
         l1.setBounds(73,5,200,40);
         add(l1);
 
         l2 = new JLabel("User Login");
         l2.setFont(new Font("Verdana",Font.PLAIN,16));
-        l2.setForeground(Color.WHITE);
+        l2.setForeground(Color.BLACK);
         l2.setBounds(500,50,375,30);
         add(l2);
 
         l8 = new JLabel("Email Address");
         l8.setFont(new Font("Verdana",Font.PLAIN,14));
-        l8.setForeground(Color.WHITE);
+        l8.setForeground(Color.black);
         l8.setBounds(500,150,375,25);
         add(l8);
 
@@ -39,7 +46,7 @@ public class login extends JFrame{
 
         l13 = new JLabel("Password");
         l13.setFont(new Font("Verdana",Font.PLAIN,14));
-        l13.setForeground(Color.WHITE);
+        l13.setForeground(Color.BLACK);
         l13.setBounds(500,220,375,25);
         add(l13);
 
@@ -49,59 +56,88 @@ public class login extends JFrame{
         p1.setBounds(500,250,200,20);
         add(p1);
 
-        b2 = new JButton("Login");
-        b2.setBackground(Color.black);
-        b2.setForeground(Color.white);
-        b2.setFont(new Font("Verdana",Font.PLAIN,13));
-        b2.setBounds(500,330,90,25);
-        add(b2);
+        button1 =  new JButton("Sign in");
+        button1.setFont(new Font("Arial",Font.BOLD,14));
+        button1.setForeground(new Color(0x4B0080));
+        button1.setBackground(new Color(0xCC98EA));
+        button1.setBounds(500,310,100,30);
+        button1.addActionListener(this);
+        add(button1);
+
+        button2 =  new JButton("Sign up");
+        button2.setFont(new Font("Arial",Font.BOLD,14));
+        button2.setForeground(new Color(0x4B0080));
+        button2.setBackground(new Color(0xCC98EA));
+        button2.setBounds(650,310,100,30);
+        button2.addActionListener(this);
+        add(button2);
+
+        button3 =  new JButton("Clear");
+        button3.setFont(new Font("Arial",Font.BOLD,14));
+        button3.setForeground(new Color(0x4B0080));
+        button3.setBackground(new Color(0xCC98EA));
+        button3.setBounds(575,360,100,30);
+        button3.addActionListener(this);
+        add(button3);
 
 
 
         l3 = new JLabel("“Get ready to embark on a health ");
         l3.setFont(new Font("Verdana",Font.ITALIC,15));
         l3.setForeground(Color.BLACK);
-        l3.setBounds(60,100,375,80);
+        l3.setBounds(60,80,375,80);
         add(l3);
 
         l4 = new JLabel("adventure like no other! Say hello ");
         l4.setFont(new Font("Verdana",Font.ITALIC,15));
         l4.setForeground(Color.BLACK);
-        l4.setBounds(60,120,375,80);
+        l4.setBounds(60,100,375,80);
         add(l4);
 
         l5 = new JLabel("to Symptocare, where health  ");
         l5.setFont(new Font("Verdana",Font.ITALIC,15));
         l5.setForeground(Color.BLACK);
-        l5.setBounds(75,140,375,80);
+        l5.setBounds(75,120,375,80);
         add(l5);
 
         l4 = new JLabel("and happiness collide in the ");
         l4.setFont(new Font("Verdana",Font.ITALIC,15));
         l4.setForeground(Color.BLACK);
-        l4.setBounds(75,160,375,80);
+        l4.setBounds(75,140,375,80);
         add(l4);
 
         l4 = new JLabel("most delightful way possible. It’s not");
         l4.setFont(new Font("Verdana",Font.ITALIC,15));
         l4.setForeground(Color.BLACK);
-        l4.setBounds(53,180,375,80);
+        l4.setBounds(53,160,375,80);
         add(l4);
 
         l4 = new JLabel("just an app; it’s your personal");
         l4.setFont(new Font("Verdana",Font.ITALIC,15));
         l4.setForeground(Color.BLACK);
-        l4.setBounds(68,200,375,80);
+        l4.setBounds(68,180,375,80);
         add(l4);
 
         l4 = new JLabel("cheerleader for wellness!”");
         l4.setFont(new Font("Verdana",Font.ITALIC,15));
         l4.setForeground(Color.BLACK);
-        l4.setBounds(75,220,375,80);
+        l4.setBounds(75,200,375,80);
         add(l4);
 
+        b4 = new JButton("Back");
+        b4.setFont(new Font("System", Font.PLAIN, 13));
+        b4.setBounds(690, 22, 130, 28);
+        b4.setForeground(new Color(0x4B0080));
+        b4.setContentAreaFilled(false);
+        b4.setOpaque(false);
+        b4.setBorder(null);
+        b4.addActionListener(this);
+        add(b4);
 
-        ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource("icons/bg.png"));
+
+
+
+        ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource("icons/mainbg1.png"));
         Image i5 = i4.getImage().getScaledInstance(800, 450, Image.SCALE_SMOOTH);
         ImageIcon i6 = new ImageIcon(i5);
         JLabel image2 = new JLabel(i6);
@@ -109,8 +145,8 @@ public class login extends JFrame{
         add(image2);
 
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/blue.png"));
-        Image i2 = i1.getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/lav.png"));
+        Image i2 = i1.getImage().getScaledInstance(350, 450, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image1 = new JLabel(i3);
         image1.setBounds(475, 25, 300, 400);
@@ -138,8 +174,40 @@ public class login extends JFrame{
         setVisible(true);
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        try{
+            if(e.getSource() == button1){
+                SQLConnection connection = new SQLConnection();
+                String email = t1.getText();
+                String pwd = p1.getText();
+                String query = "select * from login where email = '"+email+"' and password = '"+pwd+"'";
+                ResultSet resultSet = connection.statement.executeQuery(query);
+                if (resultSet.next()){
+                    setVisible(false);
+                    new homepage(email,pwd);
+                } else {
+                    JOptionPane.showMessageDialog(null,"Please enter the correct credentials");
+                }
+            } else if (e.getSource() == button2) {
+                new signup1();
+                setVisible(false);
+
+            } else if (e.getSource() == button3) {
+                t1.setText("");
+                p1.setText("");
+            }else if (e.getSource()==b4) {
+                setVisible(false);
+                new mainscreen();
+            }
+
+        }catch(Exception E){
+            E.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        new login();
+        new login("","");
 
     }
 

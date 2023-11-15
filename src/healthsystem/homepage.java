@@ -5,12 +5,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class mainscreen extends JFrame implements ActionListener {
+public class homepage extends JFrame implements ActionListener {
 
     JLabel l1,l2,l3,l4,l5,l6;
     JButton b1,b2,b3,b4,b5,b6;
+    String email,pwd;
 
-    mainscreen(){
+    homepage(String email,String pwd){
+        this.email = email;
+        this.pwd=pwd;
 
         l1 = new JLabel("Symptocare");
         l1.setForeground(new Color(0x000000));
@@ -22,19 +25,19 @@ public class mainscreen extends JFrame implements ActionListener {
 
         l3 = new JLabel("Your Journey to");
         l3.setFont(new Font("Verdana",Font.PLAIN,20));
-        l3.setForeground(new Color(0x4B0080));
+        l3.setForeground(Color.BLACK);
         l3.setBounds(600,80,375,150);
         add(l3);
 
         l4 = new JLabel("Better Health");
         l4.setFont(new Font("Verdana",Font.PLAIN,20));
-        l4.setForeground(new Color(0x4B0080));
+        l4.setForeground(Color.BLACK);
         l4.setBounds(600,120,375,150);
         add(l4);
 
         l5 = new JLabel("Starts Here");
         l5.setFont(new Font("Verdana",Font.PLAIN,20));
-        l5.setForeground(new Color(0x4B0080));
+        l5.setForeground(Color.BLACK);
         l5.setBounds(600,160,375,150);
         add(l5);
 
@@ -89,8 +92,7 @@ public class mainscreen extends JFrame implements ActionListener {
         b4.addActionListener(this);
         add(b4);
 
-
-        b5 = new JButton("Login");
+        b5 = new JButton("Logout");
         b5.setFont(new Font("Verdana",Font.BOLD,15));
         b5.setBounds(650,20,100,30);
         b5.setForeground(new Color(0x4B0080));
@@ -100,11 +102,13 @@ public class mainscreen extends JFrame implements ActionListener {
         b5.addActionListener(this);
         add(b5);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/user.png"));
+
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/account.png"));
         Image i2 = i1.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image1 = new JLabel(i3);
-        image1.setBounds(730, 25, 20, 20);
+        image1.setBounds(735, 25, 20, 20);
         add(image1);
 
         ImageIcon i7 = new ImageIcon(ClassLoader.getSystemResource("icons/logon.png"));
@@ -132,8 +136,6 @@ public class mainscreen extends JFrame implements ActionListener {
 
 
 
-
-
         setLayout((null));
         setSize(800, 500);
         setLocation(250, 90);
@@ -145,23 +147,26 @@ public class mainscreen extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
-            if(e.getSource() == b1 ){
-                new mainscreen();
+            if(e.getSource() == b1){
+                new homepage("","");
                 setVisible(false);
             } else if (e.getSource() == b2 ) {
-                new about();
+                new aboutforuser();
                 setVisible(false);
             } else if (e.getSource() == b3) {
-                JOptionPane.showMessageDialog(null, "Please login to access this page");
-            }else if (e.getSource()==b4) {
-                JOptionPane.showMessageDialog(null, "Please login to access this page");
-            }else if (e.getSource()==b5) {
+                new services(email,pwd);
                 setVisible(false);
-                new login("","");
-
-            }else if (e.getSource()==b6) {
-                JOptionPane.showMessageDialog(null, "Please login to access this page");
+            }else if (e.getSource()==b4) {
+                new contactus();
+                setVisible(false);
+            }else if (e.getSource() == b5) {
+                new mainscreen();
+                setVisible(false);
+            }else if (e.getSource() == b6 ) {
+                new services(email,pwd);
+                setVisible(false);
             }
+
 
         }catch(Exception E){
             E.printStackTrace();
@@ -169,6 +174,6 @@ public class mainscreen extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new mainscreen();
+        new homepage("","");
     }
 }

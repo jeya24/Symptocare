@@ -1,33 +1,38 @@
 package healthsystem;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class signup1 extends JFrame{
+public class signup1 extends JFrame implements ActionListener {
 
-    JLabel l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13;
-    JButton b2;
+    JLabel l1,l2,l3,l4,l5,l8,l9,l10,l11,l12,l13;
+    JButton b2,b4;
     JTextField t1,t2,t3,t4;
     JRadioButton r1,r2;
     JPasswordField p1;
+    JDateChooser date;
 
     signup1() {
 
         l1 = new JLabel("Symptocare");
-        l1.setForeground(Color.BLACK);
+        l1.setForeground(new Color(0x000000));
         l1.setFont(new Font("Verdana",Font.BOLD,18));
         l1.setBounds(73,5,200,40);
         add(l1);
 
         l2 = new JLabel("Create Account");
         l2.setFont(new Font("Verdana",Font.PLAIN,14));
-        l2.setForeground(Color.WHITE);
+        l2.setForeground(Color.black);
         l2.setBounds(500,50,375,30);
         add(l2);
 
         l8 = new JLabel("Name*");
         l8.setFont(new Font("Verdana",Font.PLAIN,12));
-        l8.setForeground(Color.WHITE);
+        l8.setForeground(Color.black);
         l8.setBounds(500,100,375,25);
         add(l8);
 
@@ -39,7 +44,7 @@ public class signup1 extends JFrame{
 
         l8 = new JLabel("Mobile Number*");
         l8.setFont(new Font("Verdana",Font.PLAIN,12));
-        l8.setForeground(Color.WHITE);
+        l8.setForeground(Color.black);
         l8.setBounds(500,200,375,25);
         add(l8);
 
@@ -51,19 +56,18 @@ public class signup1 extends JFrame{
 
         l11 = new JLabel("Date of Birth*");
         l11.setFont(new Font("Verdana",Font.PLAIN,12));
-        l11.setForeground(Color.WHITE);
+        l11.setForeground(Color.black);
         l11.setBounds(500,150,375,25);
         add(l11);
 
-        t3 = new JTextField();
-        t3.setForeground(Color.BLACK);
-        t3.setFont(new Font("Verdana",Font.PLAIN,13));
-        t3.setBounds(500,175,200,20);
-        add(t3);
+        date = new JDateChooser();
+        date.setForeground(Color.BLACK);
+        date.setBounds(500,175,200,25);
+        add(date);
 
         l12 = new JLabel("Email Address*");
         l12.setFont(new Font("Verdana",Font.PLAIN,12));
-        l12.setForeground(Color.WHITE);
+        l12.setForeground(Color.black);
         l12.setBounds(500,250,375,25);
         add(l12);
 
@@ -76,7 +80,7 @@ public class signup1 extends JFrame{
 
         l10 = new JLabel("Gender*:");
         l10.setBounds(500,294,600,40);
-        l10.setForeground(Color.WHITE);
+        l10.setForeground(Color.black);
         l10.setFont(new Font("Raleway",Font.PLAIN,12));
         add(l10);
 
@@ -92,14 +96,13 @@ public class signup1 extends JFrame{
         r2.setBounds(630,300,100,30);
         add(r2);
 
-        // to deselect one of the buttons when the other is chosen
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(r1);
         buttonGroup.add(r2);
 
-        l13 = new JLabel("Password (Max 10)");
+        l13 = new JLabel("Password (Max 10)*");
         l13.setFont(new Font("Verdana",Font.PLAIN,12));
-        l13.setForeground(Color.WHITE);
+        l13.setForeground(Color.black);
         l13.setBounds(500,325,375,25);
         add(l13);
 
@@ -110,10 +113,11 @@ public class signup1 extends JFrame{
         add(p1);
 
         b2 = new JButton("Next");
-        b2.setBackground(Color.black);
-        b2.setForeground(Color.white);
+        b2.setForeground(new Color(0x4B0080));
+        b2.setBackground(new Color(0xCC98EA));
         b2.setFont(new Font("Verdana",Font.PLAIN,13));
         b2.setBounds(660,387,90,25);
+        b2.addActionListener(this);
         add(b2);
 
 
@@ -160,8 +164,19 @@ public class signup1 extends JFrame{
         l4.setBounds(75,220,375,80);
         add(l4);
 
+        b4 = new JButton("Back");
+        b4.setFont(new Font("System", Font.PLAIN, 13));
+        b4.setBounds(690, 22, 130, 28);
+        b4.setForeground(new Color(0x4B0080));
+        b4.setContentAreaFilled(false);
+        b4.setOpaque(false);
+        b4.setBorder(null);
+        b4.addActionListener(this);
+        add(b4);
 
-        ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource("icons/bg.png"));
+
+
+        ImageIcon i4 = new ImageIcon(ClassLoader.getSystemResource("icons/mainbg1.png"));
         Image i5 = i4.getImage().getScaledInstance(800, 450, Image.SCALE_SMOOTH);
         ImageIcon i6 = new ImageIcon(i5);
         JLabel image2 = new JLabel(i6);
@@ -169,7 +184,7 @@ public class signup1 extends JFrame{
         add(image2);
 
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/blue.png"));
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/lav.png"));
         Image i2 = i1.getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image1 = new JLabel(i3);
@@ -198,6 +213,48 @@ public class signup1 extends JFrame{
         setLocation(250, 120);
         setUndecorated(true);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String name = t1.getText();
+        String mobnum = t2.getText();
+        String dob = ((JTextField) date.getDateEditor().getUiComponent()).getText();
+        String email = t4.getText();
+        String gender = null;
+        if(r1.isSelected()){
+            gender = "Male";
+        } else if (r2.isSelected()){
+            gender = "Female";
+        }
+        String pwd = p1.getText();
+
+
+        try {
+            if(e.getSource()==b2) {
+                setVisible(false);
+                new mainscreen();
+                if (t1.getText().equals("") || t2.getText().equals("") || t4.getText().equals("") || p1.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter the required credentials.");
+                } else {
+                    SQLConnection connection = new SQLConnection();
+                    String query = "insert into signup1 values('" + name + "','" + dob + "','" + mobnum + "','" + email + "','" + gender + "','" + pwd + "')";
+                    String query2 = "insert into login values('" + email + "','" + pwd + "')";
+                //to input user entered values into the table in mysql - executeupdate
+                connection.statement.executeUpdate(query);
+                connection.statement.executeUpdate(query2);
+                new signup2(email, pwd);
+                setVisible(false);
+            }
+
+        }else if (e.getSource()==b4) {
+                setVisible(false);
+                new mainscreen();
+            }
+        }catch (Exception E){
+            E.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
